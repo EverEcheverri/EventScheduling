@@ -8,12 +8,14 @@
 
   <ItemGroup>
     <Folder Include="City\Commands\" />
+    <Folder Include="City\Exceptions\" />
     <Folder Include="Country\Repositories\" />
-    <Folder Include="SharedKernel\ValueObjects\" />
+    <Folder Include="SharedKernel\NewFolder\" />
     <Folder Include="UserTeam\" />
     <Folder Include="Team\" />
     <Folder Include="User\Enums\" />
     <Folder Include="User\Exceptions\" />
+    <Folder Include="User\ValueObjects\" />
   </ItemGroup>
 
 </Project>

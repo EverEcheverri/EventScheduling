@@ -1,10 +1,12 @@
-﻿namespace EventScheduling.Domain.User.ValueObjects;
+namespace EventScheduling.Domain.User.ValueObjects;
 
 using Exceptions;
+using SharedKernel;
 
 public sealed class UserName
 {
   private const short ValueMaxLength = 255;
+  private readonly string _userName;
 
   public UserName(string userName)
   {
@@ -17,10 +19,16 @@ public sealed class UserName
     {
       throw new UserNameMaxLengthException();
     }
+    _userName = userName;
   }
 
   public static implicit operator UserName(string value)
   {
     return new UserName(value);
+  }
+
+  public static implicit operator string(UserName userName)
+  {
+    return userName._userName;
   }
 }

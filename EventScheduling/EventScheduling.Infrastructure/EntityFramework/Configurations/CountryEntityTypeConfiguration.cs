@@ -1,6 +1,7 @@
-﻿namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
+namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
 
 using Domain.Country;
+using Domain.SharedKernel.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,10 +12,11 @@ public class CountryEntityTypeConfiguration : IEntityTypeConfiguration<Country>
     builder.ToTable("Country")
       .HasKey(c => c.Id);
 
-    builder.Property(c => c.Id).HasConversion<Guid>();
+    builder.Property(c => c.Id)
+      .HasConversion<Guid>(p => p, p => new GuidValueObject(p))
+      .IsRequired();
 
     builder.Property(c => c.Name)
-      .HasColumnName("Name")
       .IsRequired()
       .HasMaxLength(100);
 

@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
 
 using Domain.User;
+using EventScheduling.Domain.User.ValueObjects;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
@@ -12,19 +13,22 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     builder.ToTable("Users")
       .HasKey(c => c.Email);
 
+    builder.Property(c => c.Email)
+      .HasConversion<string>(p => p, p => new Email(p))
+      .HasMaxLength(254);
+    builder.HasIndex(c => c.Email).IsUnique();
+
     builder.Property(c => c.Name)
-      .HasColumnName("Name")
+      .HasConversion<string>(p => p, p => new UserName(p))
       .IsRequired()
       .HasMaxLength(255);
 
     builder.Property(c => c.CityId)
-      .HasColumnName("CityId")
       .HasConversion<Guid>()
       .IsRequired()
       .HasMaxLength(255);
 
     builder.Property(c => c.Mobile)
-      .HasColumnName("Mobile")
       .IsRequired()
       .HasMaxLength(255);
   }

@@ -1,6 +1,4 @@
-﻿using EventScheduling.Domain.SharedKernel.Exceptions;
-
-namespace EventScheduling.Domain.City.Exceptions;
+namespace EventScheduling.Domain.SharedKernel.Exceptions;
 
 public class NoValidCountryIdException: BusinessException
 {
