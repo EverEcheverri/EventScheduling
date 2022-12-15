@@ -1,7 +1,6 @@
 namespace EventScheduling.Domain.User.ValueObjects;
 
 using Exceptions;
-using SharedKernel;
 
 public sealed class UserName
 {
@@ -19,6 +18,7 @@ public sealed class UserName
     {
       throw new UserNameMaxLengthException();
     }
+
     _userName = userName;
   }
 

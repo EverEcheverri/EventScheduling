@@ -1,25 +1,29 @@
 namespace EventScheduling.Domain.Country;
 
 using City;
-using EventScheduling.Domain.SharedKernel.ValueObjects;
 using SharedKernel.Exceptions;
 
 public sealed class Country
 {
   private readonly List<City> _cities = new();
 
-  private Country(GuidValueObject id, string name)
+  private Country(Guid id, string name)
   {
     Id = id;
     Name = name;
   }
 
-  public GuidValueObject Id { get; set; }
+  public Guid Id { get; set; }
   public string Name { get; set; }
   public IReadOnlyCollection<City> Cities => _cities;
 
-  public static Country Build(GuidValueObject id, string name)
+  public static Country Build(Guid id, string name)
   {
+    if (!Guid.TryParse(id.ToString(), out _))
+    {
+      throw new NoValidIdException();
+    }
+
     if (name == null)
     {
       throw new NameNullOrEmptyException();

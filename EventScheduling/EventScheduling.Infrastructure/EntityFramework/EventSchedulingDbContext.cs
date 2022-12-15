@@ -21,11 +21,11 @@ public class EventSchedulingDbContext : DbContext
 
   public DbSet<Domain.Country.Country> Country { get; set; }
   public DbSet<Domain.City.City> City { get; set; }
-  public DbSet<User> User { get; set; }
+  public DbSet<Domain.User.User> User { get; set; }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    var connectionString = _configuration.GetConnectionString("DefaultConnection");
+    var connectionString = GetConnectionStringPath();
     base.OnConfiguring(optionsBuilder);
     optionsBuilder.UseSqlite($"Data Source={connectionString};");
     //optionsBuilder.EnableSensitiveDataLogging();
@@ -49,8 +49,14 @@ public class EventSchedulingDbContext : DbContext
 
     modelBuilder.Entity<Domain.City.City>().HasData(cities);
     modelBuilder.Entity<Domain.Country.Country>().HasData(countries);
-    modelBuilder.Entity<User>().HasData(users);
+    modelBuilder.Entity<Domain.User.User>().HasData(users);
     modelBuilder.Entity<Team>().HasData(teams);
     modelBuilder.Entity<UserTeam>().HasData(userTeams);
+  }
+  public string GetConnectionStringPath()
+  {
+    var relativePath = _configuration.GetConnectionString("DefaultConnection");
+    var absolutePath = Path.GetFullPath(relativePath!);
+    return absolutePath;
   }
 }

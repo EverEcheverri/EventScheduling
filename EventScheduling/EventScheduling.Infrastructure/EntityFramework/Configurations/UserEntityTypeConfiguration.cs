@@ -29,6 +29,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
       .HasMaxLength(255);
 
     builder.Property(c => c.Mobile)
+      .HasConversion<string>(p => p, p => new Mobile(p))
       .IsRequired()
       .HasMaxLength(255);
   }

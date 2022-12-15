@@ -1,26 +1,30 @@
 namespace EventScheduling.Domain.City;
 
-using EventScheduling.Domain.SharedKernel.ValueObjects;
 using SharedKernel.Exceptions;
 
 public sealed class City
 {
-  private City(GuidValueObject id, string name, GuidValueObject countryId)
+  private City(Guid id, string name, Guid countryId)
   {
     Id = id;
     Name = name;
     CountryId = countryId;
   }
 
-  public GuidValueObject Id { get; set; }
+  public Guid Id { get; set; }
   public string Name { get; set; }
-  public GuidValueObject CountryId { get; set; }
+  public Guid CountryId { get; set; }
 
-  public static City Build(GuidValueObject id, string name, GuidValueObject countryId)
+  public static City Build(Guid id, string name, Guid countryId)
   {
     if (name == null)
     {
       throw new NameNullOrEmptyException();
+    }
+
+    if (!Guid.TryParse(id.ToString(), out _))
+    {
+      throw new NoValidIdException();
     }
 
     var city = new City(id, name, countryId);

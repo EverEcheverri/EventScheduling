@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,12 +8,15 @@
 
   <ItemGroup>
     <Folder Include="City\Commands\" />
+    <Folder Include="Country\Exceptions\" />
     <Folder Include="Country\Repositories\" />
     <Folder Include="SharedKernel\ValueObjects\" />
     <Folder Include="UserTeam\" />
     <Folder Include="Team\" />
     <Folder Include="User\Enums\" />
     <Folder Include="User\Exceptions\" />
+    <Folder Include="User\Commands\" />
+    <Folder Include="User\Repositories\" />
   </ItemGroup>
 
 </Project>

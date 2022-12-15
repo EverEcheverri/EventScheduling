@@ -1,6 +1,5 @@
 ﻿namespace EventScheduling.Infrastructure.EntityFramework.Country.Repositories;
 
-using System.Diagnostics.CodeAnalysis;
 using Domain.Country;
 using Domain.Country.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +15,12 @@ public class CountryRepository : ICountryRepository
 
   public async Task<Country> GetByNameAsync(string name, CancellationToken cancellationToken)
   {
-    var country =
+    var countryResultAsync =
       await _context.Country
         .Include(c => c.Cities)
-        .Where(c => c.Name.ToLower() == name.ToLower())
-        .SingleOrDefaultAsync(cancellationToken);
+        .FirstOrDefaultAsync(co => co.Name.ToLower() == name.ToLower(),
+          cancellationToken);
 
-    return country;
+    return countryResultAsync;
   }
 }

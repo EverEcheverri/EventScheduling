@@ -27,6 +27,7 @@
     <Folder Include="EntityFramework\City\Repositories\" />
     <Folder Include="EntityFramework\Country\Repositories\" />
     <Folder Include="DependencyInjection\" />
+    <Folder Include="EntityFramework\User\Repositories\" />
   </ItemGroup>
 
 </Project>
