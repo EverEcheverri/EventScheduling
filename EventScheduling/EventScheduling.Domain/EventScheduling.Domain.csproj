@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="City\Commands\" />
+    <Folder Include="City\Exceptions\" />
+    <Folder Include="Country\Repositories\" />
+    <Folder Include="UserTeam\" />
+    <Folder Include="Team\" />
+    <Folder Include="User\Enums\" />
+    <Folder Include="User\Exceptions\" />
+    <Folder Include="User\ValueObjects\" />
+  </ItemGroup>
+
+</Project>
