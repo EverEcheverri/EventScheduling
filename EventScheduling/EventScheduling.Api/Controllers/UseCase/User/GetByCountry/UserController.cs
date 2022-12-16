@@ -1,6 +1,5 @@
 ﻿namespace EventScheduling.Api.Controllers.UseCase.User.GetByCountry;
 
-using System.Net;
 using Application.User.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

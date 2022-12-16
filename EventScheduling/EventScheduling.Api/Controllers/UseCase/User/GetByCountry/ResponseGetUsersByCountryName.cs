@@ -1,23 +1,22 @@
 ﻿namespace EventScheduling.Api.Controllers.UseCase.User.GetByCountry;
 
-using Domain.User;
+using Domain.User.Queries;
 
 public class ResponseGetUsersByCountryName
 {
+  public string UserName { get; set; }
   public string Email { get; set; }
-  public string Name { get; set; }
-  public Guid CityId { get; set; }
-  public string Mobile { get; set; }
   public string Role { get; set; }
-  internal static ICollection<ResponseGetUsersByCountryName> Map(IEnumerable<User> mediaUrlInfoDto)
+  public string CityName { get; set; }
+
+  internal static ICollection<ResponseGetUsersByCountryName> Map(IEnumerable<GetByCountryQuery> users)
   {
-    return mediaUrlInfoDto.Select(u => new ResponseGetUsersByCountryName
+    return users.Select(u => new ResponseGetUsersByCountryName
     {
+      UserName = u.UserName,
       Email = u.Email,
-      Name = u.Name,
-      CityId = u.CityId,
-      Mobile = u.Mobile,
-      Role = u.Role.ToString()
+      Role = u.Role.ToString(),
+      CityName = u.CityName
     }).ToList();
   }
 }
