@@ -3,6 +3,7 @@
 using Domain.User;
 using Domain.User.Commands;
 using Domain.User.Repositories;
+using Exceptions;
 using Interfaces;
 
 public class CreateUserUseCase : ICreateUser
@@ -16,8 +17,14 @@ public class CreateUserUseCase : ICreateUser
 
   public async Task ExecuteAsync(CreateUserCommand createUserCommand, CancellationToken cancellationToken)
   {
-    var user = User.Build(createUserCommand.Email, createUserCommand.Name, createUserCommand.CityId,
+    var user = await _userRepository.GetByEmailAsync(createUserCommand.Email, cancellationToken);
+    if (user != null)
+    {
+      throw new UserEmailAlreadyExistException(createUserCommand.Email);
+    }
+
+    var newUser = User.Build(createUserCommand.Email, createUserCommand.Name, createUserCommand.CityId,
       createUserCommand.Mobile, createUserCommand.Role);
-    await _userRepository.SaveAsync(user, cancellationToken);
+    await _userRepository.SaveAsync(newUser, cancellationToken);
   }
 }

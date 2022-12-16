@@ -12,8 +12,10 @@
 
   <ItemGroup>
     <Folder Include="City\Interfaces\" />
+    <Folder Include="City\Exceptions\" />
     <Folder Include="DependencyInjection\" />
     <Folder Include="User\Interfaces\" />
+    <Folder Include="User\Exceptions\" />
     <Folder Include="User\UseCases\" />
   </ItemGroup>
 

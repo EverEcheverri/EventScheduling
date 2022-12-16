@@ -1,13 +1,28 @@
+using System.Net.Mime;
+using EventScheduling.Api.Middleware;
 using EventScheduling.Application.DependencyInjection;
 using EventScheduling.Infrastructure.DependencyInjection;
 using EventScheduling.Infrastructure.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+{
+  options.InvalidModelStateResponseFactory = context =>
+  {
+    var problemDetails = CustomBadRequest.ConstructErrorMessages(context);
+
+    var result = new BadRequestObjectResult(problemDetails);
+    result.ContentTypes.Add(MediaTypeNames.Application.Json);
+
+    return result;
+  };
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -30,6 +45,9 @@ using (var scope = app.Services.CreateScope())
   var dataContext = scope.ServiceProvider.GetRequiredService<EventSchedulingDbContext>();
   dataContext.Database.Migrate();
 }
+
+app.UseCustomMiddleware();
+app.UseExceptionMiddleware();
 
 app.UseHttpsRedirection();
 

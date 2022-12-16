@@ -1,8 +1,10 @@
-﻿namespace EventScheduling.Api.Controllers.UseCase.Cities.Create;
+﻿namespace EventScheduling.Api.Controllers.UseCase.City.Create;
 
 using System.ComponentModel.DataAnnotations;
 using System.Net;
-using Application.City.Interfaces;
+using Cities.Create;
+using EventScheduling.Api.Middleware;
+using EventScheduling.Application.City.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/[controller]")]
@@ -17,6 +19,10 @@ public class CityController : ControllerBase
   }
 
   [HttpPost]
+  [ProducesResponseType(StatusCodes.Status201Created)]
+  [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status409Conflict)]
+  [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status500InternalServerError)]
   public async Task<IActionResult> CreatePackage([FromBody] [Required] RequestCreateCity requestCreateCity,
     CancellationToken cancellationToken)
   {

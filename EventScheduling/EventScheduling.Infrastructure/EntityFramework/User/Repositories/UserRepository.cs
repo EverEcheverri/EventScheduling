@@ -3,6 +3,7 @@
 using Domain.User;
 using Domain.User.Queries;
 using Domain.User.Repositories;
+using Domain.User.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 public class UserRepository : IUserRepository
@@ -18,6 +19,12 @@ public class UserRepository : IUserRepository
   {
     await _context.User.AddAsync(user, cancellationToken);
     await _context.SaveChangesAsync(cancellationToken);
+  }
+
+  public async Task<User?> GetByEmailAsync(Email email, CancellationToken cancellationToken)
+  {
+    cancellationToken.ThrowIfCancellationRequested();
+    return await _context.User.FirstOrDefaultAsync(u => u.Email == email, cancellationToken: cancellationToken);
   }
 
   public async Task<ICollection<GetByCountryQuery>> GetByCountryIdAsync(Guid countryId,
