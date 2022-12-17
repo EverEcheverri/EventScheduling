@@ -25,12 +25,12 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
     builder.Property(c => c.CityId).HasConversion<Guid>()
       .IsRequired();
 
-    builder.Property(p => p.StartTime)
-      .HasColumnName(nameof(Event.StartTime))
-      .HasConversion(p => p, p => DateTime.SpecifyKind(p, DateTimeKind.Local));
+    builder.Property(p => p.StartTimeUtc)
+      .HasColumnName(nameof(Event.StartTimeUtc))
+      .HasConversion(p => p, p => DateTime.SpecifyKind(p, DateTimeKind.Utc));
 
-    builder.Property(p => p.EndTime)
-      .HasColumnName(nameof(Event.EndTime))
-      .HasConversion(p => p, p => DateTime.SpecifyKind(p, DateTimeKind.Local));
+    builder.Property(p => p.EndTimeUtc)
+      .HasColumnName(nameof(Event.EndTimeUtc))
+      .HasConversion(p => p, p => DateTime.SpecifyKind(p, DateTimeKind.Utc));
   }
 }

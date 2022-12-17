@@ -3,7 +3,6 @@
 using Domain.City;
 using Domain.City.Commands;
 using Domain.City.Repositories;
-using Domain.Country.Repositories;
 using Exceptions;
 using Interfaces;
 
@@ -24,7 +23,8 @@ public class CreateCityUseCase : ICreateCity
       throw new CityAlreadyExistException(createCityCommand.Name);
     }
 
-    var newCity = City.Build(createCityCommand.Id, createCityCommand.Name, createCityCommand.CountryId);
+    var newCity = City.Build(createCityCommand.Id, createCityCommand.Name, createCityCommand.CountryId,
+      createCityCommand.TimeZoneId);
     await _cityRepository.SaveAsync(newCity, cancellationToken);
   }
 }

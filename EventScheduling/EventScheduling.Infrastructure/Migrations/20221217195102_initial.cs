@@ -33,10 +33,11 @@ namespace EventScheduling.Infrastructure.Migrations
                     Name = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     EventType = table.Column<int>(type: "INTEGER", nullable: false),
-                    StartTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    StartTimeUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    EndTimeUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
                     CityId = table.Column<Guid>(type: "TEXT", nullable: false),
                     CountryId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UtcOffset = table.Column<string>(type: "TEXT", nullable: false),
                     Latitude = table.Column<double>(type: "REAL", nullable: false),
                     Longitude = table.Column<double>(type: "REAL", nullable: false)
                 },
@@ -75,7 +76,8 @@ namespace EventScheduling.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    CountryId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    CountryId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TimeZoneId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -160,14 +162,14 @@ namespace EventScheduling.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "City",
-                columns: new[] { "Id", "CountryId", "Name" },
+                columns: new[] { "Id", "CountryId", "Name", "TimeZoneId" },
                 values: new object[,]
                 {
-                    { new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"), new Guid("3eb63894-c376-4eea-923a-ac1f3bfc6235"), "Asuncion" },
-                    { new Guid("102077ed-f0de-442c-8d97-fbb7dfd96d08"), new Guid("c39c3b71-78e9-4dcd-bbbd-35ac159f984b"), "Montevideo" },
-                    { new Guid("386a04f3-e4c4-4922-9e79-e75ac0fa3a6a"), new Guid("e0007308-e1e3-4892-a5a7-883c02c6de22"), "Lima" },
-                    { new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"), new Guid("8217f508-c17d-431e-9cf0-05ca8984971b"), "Medellin" },
-                    { new Guid("9b862593-628a-4bc1-8cc4-038e01f34241"), new Guid("8217f508-c17d-431e-9cf0-05ca8984971b"), "Bogota" }
+                    { new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"), new Guid("3eb63894-c376-4eea-923a-ac1f3bfc6235"), "Asuncion", "America/Asuncion" },
+                    { new Guid("102077ed-f0de-442c-8d97-fbb7dfd96d08"), new Guid("c39c3b71-78e9-4dcd-bbbd-35ac159f984b"), "Montevideo", "America/Montevideo" },
+                    { new Guid("386a04f3-e4c4-4922-9e79-e75ac0fa3a6a"), new Guid("e0007308-e1e3-4892-a5a7-883c02c6de22"), "Lima", "America/Lima" },
+                    { new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"), new Guid("8217f508-c17d-431e-9cf0-05ca8984971b"), "Medellin", "America/Bogota" },
+                    { new Guid("9b862593-628a-4bc1-8cc4-038e01f34241"), new Guid("8217f508-c17d-431e-9cf0-05ca8984971b"), "Bogota", "America/Bogota" }
                 });
 
             migrationBuilder.CreateIndex(

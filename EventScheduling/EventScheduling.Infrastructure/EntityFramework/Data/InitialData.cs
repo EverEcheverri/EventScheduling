@@ -38,11 +38,11 @@ internal static class InitialData
   {
     return new List<City>
     {
-      City.Build(MedellinId, "Medellin", ColombiaId),
-      City.Build(BogotaId, "Bogota", ColombiaId),
-      City.Build(LimaId, "Lima", PeruId),
-      City.Build(MontevideoId, "Montevideo", UruguayId),
-      City.Build(AsuncionId, "Asuncion", ParaguayId)
+      City.Build(MedellinId, "Medellin", ColombiaId,"America/Bogota"),
+      City.Build(BogotaId, "Bogota", ColombiaId, "America/Bogota"),
+      City.Build(LimaId, "Lima", PeruId, "America/Lima"),
+      City.Build(MontevideoId, "Montevideo", UruguayId,"America/Montevideo"),
+      City.Build(AsuncionId, "Asuncion", ParaguayId, "America/Asuncion")
     };
   }
 
@@ -69,7 +69,7 @@ internal static class InitialData
     };
   }
 
-  internal static IEnumerable<UserTeam> GetUserTeams() 
+  internal static IEnumerable<UserTeam> GetUserTeams()
   {
     return new List<UserTeam>
     {

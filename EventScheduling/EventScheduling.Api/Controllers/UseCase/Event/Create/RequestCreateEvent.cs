@@ -1,6 +1,7 @@
 ﻿namespace EventScheduling.Api.Controllers.UseCase.Event.Create;
 
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using Domain.Event.Commands;
 using Domain.Event.Enums;
 
@@ -27,14 +28,16 @@ public class RequestCreateEvent
 
   internal CreateEventCommand ToCreateEventCommand()
   {
+    var startTime = DateTime.Parse(StartTime.ToString(CultureInfo.InvariantCulture));
+    var endTime = DateTime.Parse(EndTime.ToString(CultureInfo.InvariantCulture));
     return new CreateEventCommand
     {
       Id = Guid.NewGuid(),
       Name = Name,
       Description = Description,
       EventType = EventType,
-      StartTime = StartTime,
-      EndTime = EndTime,
+      StartTimeUtc = startTime.ToUniversalTime(),
+      EndTimeUtc = endTime.ToUniversalTime(),
       CityId = CityId
     };
   }

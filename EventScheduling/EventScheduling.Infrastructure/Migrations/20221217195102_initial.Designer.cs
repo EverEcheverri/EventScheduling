@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventScheduling.Infrastructure.Migrations
 {
     [DbContext(typeof(EventSchedulingDbContext))]
-    [Migration("20221216234221_initial")]
+    [Migration("20221217195102_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -34,6 +34,11 @@ namespace EventScheduling.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("TimeZoneId")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
@@ -45,31 +50,36 @@ namespace EventScheduling.Infrastructure.Migrations
                         {
                             Id = new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"),
                             CountryId = new Guid("8217f508-c17d-431e-9cf0-05ca8984971b"),
-                            Name = "Medellin"
+                            Name = "Medellin",
+                            TimeZoneId = "America/Bogota"
                         },
                         new
                         {
                             Id = new Guid("9b862593-628a-4bc1-8cc4-038e01f34241"),
                             CountryId = new Guid("8217f508-c17d-431e-9cf0-05ca8984971b"),
-                            Name = "Bogota"
+                            Name = "Bogota",
+                            TimeZoneId = "America/Bogota"
                         },
                         new
                         {
                             Id = new Guid("386a04f3-e4c4-4922-9e79-e75ac0fa3a6a"),
                             CountryId = new Guid("e0007308-e1e3-4892-a5a7-883c02c6de22"),
-                            Name = "Lima"
+                            Name = "Lima",
+                            TimeZoneId = "America/Lima"
                         },
                         new
                         {
                             Id = new Guid("102077ed-f0de-442c-8d97-fbb7dfd96d08"),
                             CountryId = new Guid("c39c3b71-78e9-4dcd-bbbd-35ac159f984b"),
-                            Name = "Montevideo"
+                            Name = "Montevideo",
+                            TimeZoneId = "America/Montevideo"
                         },
                         new
                         {
                             Id = new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"),
                             CountryId = new Guid("3eb63894-c376-4eea-923a-ac1f3bfc6235"),
-                            Name = "Asuncion"
+                            Name = "Asuncion",
+                            TimeZoneId = "America/Asuncion"
                         });
                 });
 
@@ -128,9 +138,9 @@ namespace EventScheduling.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("EndTimeUtc")
                         .HasColumnType("TEXT")
-                        .HasColumnName("EndTime");
+                        .HasColumnName("EndTimeUtc");
 
                     b.Property<int>("EventType")
                         .HasColumnType("INTEGER");
@@ -146,9 +156,13 @@ namespace EventScheduling.Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime>("StartTimeUtc")
                         .HasColumnType("TEXT")
-                        .HasColumnName("StartTime");
+                        .HasColumnName("StartTimeUtc");
+
+                    b.Property<string>("UtcOffset")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

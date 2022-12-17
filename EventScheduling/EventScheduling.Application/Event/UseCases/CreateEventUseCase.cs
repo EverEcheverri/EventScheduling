@@ -1,11 +1,13 @@
 ﻿namespace EventScheduling.Application.Event.UseCases;
 
+using City.Exceptions;
 using Domain.City.Repositories;
 using Domain.Event;
 using Domain.Event.Commands;
 using Domain.Event.Enums;
 using Domain.Event.Repositories;
 using Domain.LocationService;
+using EventScheduling.Application.Event.Exceptions;
 using Interfaces;
 
 public class CreateEventUseCase : ICreateEvent
@@ -24,13 +26,21 @@ public class CreateEventUseCase : ICreateEvent
 
   public async Task ExecuteAsync(CreateEventCommand createEventCommand, CancellationToken cancellationToken)
   {
+    var currentUtcTime = DateTime.UtcNow;
+
+    if (createEventCommand.StartTimeUtc < currentUtcTime)
+    {
+      throw new CannotCreateEventInPastTimeException(createEventCommand.StartTimeUtc);
+    }
+
     var city = await _cityRepository.GetByIdAsync(createEventCommand.CityId, cancellationToken);
     if (city == null)
     {
-      throw new Exception("");
+      throw new CityDoesNotExistException(createEventCommand.CityId);
     }
 
     var countryId = Guid.Empty;
+    var utcOffset = string.Empty;
     double latitude = 0;
     double longitude = 0;
 
@@ -39,6 +49,7 @@ public class CreateEventUseCase : ICreateEvent
     {
       var cityLocationResult = await _cityLocation.IGetCityLocationAsync(city.Name, cancellationToken);
       countryId = city.CountryId;
+      utcOffset = cityLocationResult.location.utc_offset;
       latitude = double.Parse(cityLocationResult.location.lat);
       longitude = double.Parse(cityLocationResult.location.lon);
     }
@@ -48,10 +59,11 @@ public class CreateEventUseCase : ICreateEvent
       createEventCommand.Name,
       createEventCommand.Description,
       createEventCommand.EventType,
-      createEventCommand.StartTime,
-      createEventCommand.EndTime,
+      createEventCommand.StartTimeUtc,
+      createEventCommand.EndTimeUtc,
       createEventCommand.CityId,
       countryId,
+      utcOffset,
       latitude,
       longitude);
 

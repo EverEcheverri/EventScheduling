@@ -19,11 +19,6 @@ public class UserController : ControllerBase
   public async Task<IActionResult> GetByCountry(string countryName, CancellationToken cancellationToken)
   {
     var users = await _getByCountry.ExecuteAsync(countryName, cancellationToken);
-
-    DateTime ingestionDateTime = DateTime.Now;
-    var one = DateTime.SpecifyKind(ingestionDateTime, DateTimeKind.Utc);
-    var two = DateTime.SpecifyKind(ingestionDateTime, DateTimeKind.Local);
-
     return Ok(ResponseGetUsersByCountryName.Map(users));
   }
 }

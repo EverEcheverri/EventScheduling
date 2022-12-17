@@ -20,5 +20,9 @@ public class CityEntityTypeConfiguration : IEntityTypeConfiguration<City>
     builder.Property(c => c.Name)
       .IsRequired()
       .HasMaxLength(200);
+
+    builder.Property(c => c.TimeZoneId)
+      .IsRequired()
+      .HasMaxLength(200);
   }
 }

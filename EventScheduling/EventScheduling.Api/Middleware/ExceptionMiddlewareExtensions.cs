@@ -3,6 +3,7 @@
 using System.Net;
 using Application.City.Exceptions;
 using Application.User.Exceptions;
+using EventScheduling.Application.Event.Exceptions;
 using Microsoft.Net.Http.Headers;
 
 public static class ExceptionMiddlewareExtensions
@@ -35,6 +36,8 @@ public static class ExceptionMiddlewareExtensions
       // Conflict
       nameof(UserEmailAlreadyExistException) => (HttpStatusCode.Conflict, LoggingEvents.UserEmailAlreadyExist),
       nameof(CityAlreadyExistException) => (HttpStatusCode.Conflict, LoggingEvents.CityAlreadyExist),
+      nameof(CannotCreateEventInPastTimeException) => (HttpStatusCode.Conflict, LoggingEvents.CityAlreadyExist),
+      nameof(CityDoesNotExistException) => (HttpStatusCode.Conflict, LoggingEvents.CityAlreadyExist),
 
       //Default
       _ => (HttpStatusCode.InternalServerError, LoggingEvents.Unknown)
