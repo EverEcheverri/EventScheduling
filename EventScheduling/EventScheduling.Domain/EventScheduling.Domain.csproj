@@ -10,6 +10,10 @@
     <Folder Include="City\Commands\" />
     <Folder Include="Country\Exceptions\" />
     <Folder Include="Country\Repositories\" />
+    <Folder Include="Event\Enums\" />
+    <Folder Include="Event\Commands\" />
+    <Folder Include="Event\Repositories\" />
+    <Folder Include="LocationService\" />
     <Folder Include="SharedKernel\ValueObjects\" />
     <Folder Include="UserTeam\" />
     <Folder Include="Team\" />

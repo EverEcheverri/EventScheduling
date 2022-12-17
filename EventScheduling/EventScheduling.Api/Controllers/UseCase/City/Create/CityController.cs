@@ -23,7 +23,7 @@ public class CityController : ControllerBase
   [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status400BadRequest)]
   [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status409Conflict)]
   [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status500InternalServerError)]
-  public async Task<IActionResult> CreatePackage([FromBody] [Required] RequestCreateCity requestCreateCity,
+  public async Task<IActionResult> CreateCity([FromBody] [Required] RequestCreateCity requestCreateCity,
     CancellationToken cancellationToken)
   {
     var command = requestCreateCity.ToCreateCityCommand();

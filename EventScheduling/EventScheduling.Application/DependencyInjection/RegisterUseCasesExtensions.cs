@@ -4,6 +4,8 @@ using City.Interfaces;
 using City.UseCases;
 using Country.Interfaces;
 using Country.UseCases;
+using Event.Interfaces;
+using Event.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 using User.Interfaces;
 using User.UseCases;
@@ -16,6 +18,7 @@ public static class RegisterUseCasesExtensions
       .AddScoped<ICreateCity, CreateCityUseCase>()
       .AddScoped<IGetCountryByName, GetCountryByNameUseCase>()
       .AddScoped<ICreateUser, CreateUserUseCase>()
-      .AddScoped<IGetByCountry, GetByCountryUseCase>();
+      .AddScoped<IGetByCountry, GetByCountryUseCase>()
+      .AddScoped<ICreateEvent, CreateEventUseCase>();
   }
 }

@@ -16,9 +16,13 @@ public class UserController : ControllerBase
 
   [HttpGet("countryName")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseGetUsersByCountryName>))]
-  public async Task<IActionResult> CreatePackage(string countryName, CancellationToken cancellationToken)
+  public async Task<IActionResult> GetByCountry(string countryName, CancellationToken cancellationToken)
   {
     var users = await _getByCountry.ExecuteAsync(countryName, cancellationToken);
+
+    DateTime ingestionDateTime = DateTime.Now;
+    var one = DateTime.SpecifyKind(ingestionDateTime, DateTimeKind.Utc);
+    var two = DateTime.SpecifyKind(ingestionDateTime, DateTimeKind.Local);
 
     return Ok(ResponseGetUsersByCountryName.Map(users));
   }

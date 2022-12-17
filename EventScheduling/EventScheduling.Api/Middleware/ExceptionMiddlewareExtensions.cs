@@ -1,9 +1,8 @@
-﻿using System.Net;
+﻿namespace EventScheduling.Api.Middleware;
 
-namespace EventScheduling.Api.Middleware;
-
-using EventScheduling.Application.City.Exceptions;
-using EventScheduling.Application.User.Exceptions;
+using System.Net;
+using Application.City.Exceptions;
+using Application.User.Exceptions;
 using Microsoft.Net.Http.Headers;
 
 public static class ExceptionMiddlewareExtensions
@@ -12,8 +11,9 @@ public static class ExceptionMiddlewareExtensions
   {
     return builder.UseMiddleware<ExceptionMiddleware>();
   }
-  public static Task FileManagerErrorResponseAsync(this HttpResponse response,
-      Exception businessException)
+
+  public static Task EventSchedulingErrorResponseAsync(this HttpResponse response,
+    Exception businessException)
   {
     var (httpStatusCode, eventId) = GetResponseCode(businessException.GetType().Name);
     var message = $"{{\"code\": {eventId},\"message\":\"{businessException.Message}\"}}";

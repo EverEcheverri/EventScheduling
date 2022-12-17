@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventScheduling.Infrastructure.Migrations
 {
     [DbContext(typeof(EventSchedulingDbContext))]
-    [Migration("20221215210836_initial")]
+    [Migration("20221216234221_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -109,6 +109,50 @@ namespace EventScheduling.Infrastructure.Migrations
                             Id = new Guid("3eb63894-c376-4eea-923a-ac1f3bfc6235"),
                             Name = "Paraguay"
                         });
+                });
+
+            modelBuilder.Entity("EventScheduling.Domain.Event.Event", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CityId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CountryId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("EndTime");
+
+                    b.Property<int>("EventType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("StartTime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Event", (string)null);
                 });
 
             modelBuilder.Entity("EventScheduling.Domain.Team.Team", b =>

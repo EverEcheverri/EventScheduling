@@ -22,7 +22,7 @@ public class UserController : ControllerBase
   [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status400BadRequest)]
   [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status409Conflict)]
   [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status500InternalServerError)]
-  public async Task<IActionResult> CreatePackage([FromBody] [Required] RequestCreateUser requestCreateUser,
+  public async Task<IActionResult> CreateUser([FromBody] [Required] RequestCreateUser requestCreateUser,
     CancellationToken cancellationToken)
   {
     var command = requestCreateUser.ToCreateUserCommand();

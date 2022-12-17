@@ -37,13 +37,13 @@ public class ExceptionMiddleware
       if (ex is BusinessException)
       {
         _logger.LogError(ex.Message);
-        await httpContext.Response.FileManagerErrorResponseAsync(ex);
+        await httpContext.Response.EventSchedulingErrorResponseAsync(ex);
       }
       else
       {
         _logger.LogWarning(LoggingEvents.Unknown, "Exception not controlled or logged");
         _logger.LogError(ex, ex.Message);
-        await httpContext.Response.FileManagerErrorResponseAsync(ex);
+        await httpContext.Response.EventSchedulingErrorResponseAsync(ex);
       }
     }
   }

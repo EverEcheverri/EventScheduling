@@ -22,6 +22,7 @@ public class EventSchedulingDbContext : DbContext
   public DbSet<Domain.Country.Country> Country { get; set; }
   public DbSet<Domain.City.City> City { get; set; }
   public DbSet<Domain.User.User> User { get; set; }
+  public DbSet<Domain.Event.Event> Event { get; set; }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
@@ -40,6 +41,7 @@ public class EventSchedulingDbContext : DbContext
     modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
     modelBuilder.ApplyConfiguration(new TeamEntityTypeConfiguration());
     modelBuilder.ApplyConfiguration(new UserTeamEntityTypeConfiguration());
+    modelBuilder.ApplyConfiguration(new EventEntityTypeConfiguration());
 
     var cities = InitialData.GetCities();
     var countries = InitialData.GetCountries();

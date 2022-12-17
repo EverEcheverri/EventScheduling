@@ -24,4 +24,10 @@ public class CityRepository : ICityRepository
     cancellationToken.ThrowIfCancellationRequested();
     return await _context.City.FirstOrDefaultAsync(u => u.Name == name, cancellationToken);
   }
+
+  public async Task<City?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+  {
+    cancellationToken.ThrowIfCancellationRequested();
+    return await _context.City.FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
+  }
 }
