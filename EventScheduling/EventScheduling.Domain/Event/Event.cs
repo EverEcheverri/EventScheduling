@@ -4,6 +4,7 @@ using Enums;
 
 public sealed class Event
 {
+  private readonly List<Invitation> _invitation = new List<Invitation>();
   private Event(Guid id, string name, string description, EventType eventType, DateTime startTimeUtc,
     DateTime endTimeUtc, Guid cityId, Guid countryId, string utcOffset, double latitude, double longitude)
   {
@@ -31,6 +32,7 @@ public sealed class Event
   public string UtcOffset { get; set; }
   public double Latitude { get; set; }
   public double Longitude { get; set; }
+  public IReadOnlyCollection<Invitation> Invitation => _invitation;
 
   public static Event Build(Guid id, string name, string description, EventType eventType, DateTime startTimeUtc,
     DateTime endTimeUtc, Guid cityId, Guid countryId, string utcOffset, double latitude, double longitude)
@@ -38,5 +40,10 @@ public sealed class Event
     var newEvent = new Event(id, name, description, eventType, startTimeUtc, endTimeUtc, cityId, countryId, utcOffset,
       latitude, longitude);
     return newEvent;
+  }
+
+  public void AddInvitation(Invitation invitation)
+  {
+    _invitation.Add(invitation);
   }
 }

@@ -6,7 +6,7 @@ using Domain.LocationService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-public class LocationService : ICitylocation
+public class LocationService : ICitylocationService
 {
   private readonly HttpClient _client;
   protected readonly IConfiguration _configuration;

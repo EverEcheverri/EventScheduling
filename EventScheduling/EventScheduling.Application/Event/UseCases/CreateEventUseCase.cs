@@ -7,17 +7,17 @@ using Domain.Event.Commands;
 using Domain.Event.Enums;
 using Domain.Event.Repositories;
 using Domain.LocationService;
-using EventScheduling.Application.Event.Exceptions;
+using Exceptions;
 using Interfaces;
 
 public class CreateEventUseCase : ICreateEvent
 {
-  private readonly ICitylocation _cityLocation;
+  private readonly ICitylocationService _cityLocation;
   private readonly ICityRepository _cityRepository;
   private readonly IEventRepository _eventRepository;
 
   public CreateEventUseCase(IEventRepository eventRepository, ICityRepository cityRepository,
-    ICitylocation cityLocation)
+    ICitylocationService cityLocation)
   {
     _eventRepository = eventRepository;
     _cityRepository = cityRepository;

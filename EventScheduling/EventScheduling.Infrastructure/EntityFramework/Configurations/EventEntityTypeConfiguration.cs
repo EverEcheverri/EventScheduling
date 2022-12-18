@@ -32,5 +32,9 @@ public class EventEntityTypeConfiguration : IEntityTypeConfiguration<Event>
     builder.Property(p => p.EndTimeUtc)
       .HasColumnName(nameof(Event.EndTimeUtc))
       .HasConversion(p => p, p => DateTime.SpecifyKind(p, DateTimeKind.Utc));
+
+    builder.HasMany(e => e.Invitation).WithOne().IsRequired().OnDelete(DeleteBehavior.Cascade);
+    builder.Metadata.FindNavigation(nameof(Event.Invitation))
+      .SetPropertyAccessMode(PropertyAccessMode.Field);
   }
 }

@@ -2,7 +2,7 @@
 
 namespace EventScheduling.Domain.LocationService;
 
-public interface ICitylocation
+public interface ICitylocationService
 {
   Task<ResponseGetCityLocation> IGetCityLocationAsync(string cityName, CancellationToken cancellationToken);
 }

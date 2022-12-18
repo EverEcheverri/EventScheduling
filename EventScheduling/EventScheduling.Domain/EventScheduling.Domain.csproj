@@ -7,14 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SharedKernel\ValueObjects\**" />
+    <EmbeddedResource Remove="SharedKernel\ValueObjects\**" />
+    <None Remove="SharedKernel\ValueObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="City\Commands\" />
     <Folder Include="City\Exceptions\" />
     <Folder Include="Country\Repositories\" />
     <Folder Include="Event\Enums\" />
-    <Folder Include="Event\Commands\" />
     <Folder Include="Event\Repositories\" />
     <Folder Include="LocationService\" />
-    <Folder Include="SharedKernel\ValueObjects\" />
     <Folder Include="UserTeam\" />
     <Folder Include="Team\" />
     <Folder Include="User\Enums\" />

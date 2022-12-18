@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventScheduling.Infrastructure.Migrations
 {
     [DbContext(typeof(EventSchedulingDbContext))]
-    [Migration("20221217195102_initial")]
+    [Migration("20221218010022_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -167,6 +167,40 @@ namespace EventScheduling.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Event", (string)null);
+                });
+
+            modelBuilder.Entity("EventScheduling.Domain.Event.Invitation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("EndTime");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("StartTime");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Invitation", (string)null);
                 });
 
             modelBuilder.Entity("EventScheduling.Domain.Team.Team", b =>
@@ -355,6 +389,15 @@ namespace EventScheduling.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EventScheduling.Domain.Event.Invitation", b =>
+                {
+                    b.HasOne("EventScheduling.Domain.Event.Event", null)
+                        .WithMany("Invitation")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EventScheduling.Domain.User.User", b =>
                 {
                     b.HasOne("EventScheduling.Domain.Team.Team", null)
@@ -365,6 +408,11 @@ namespace EventScheduling.Infrastructure.Migrations
             modelBuilder.Entity("EventScheduling.Domain.Country.Country", b =>
                 {
                     b.Navigation("Cities");
+                });
+
+            modelBuilder.Entity("EventScheduling.Domain.Event.Event", b =>
+                {
+                    b.Navigation("Invitation");
                 });
 
             modelBuilder.Entity("EventScheduling.Domain.Team.Team", b =>

@@ -21,6 +21,7 @@ public static class RegisterServicesExtensions
       .AddScoped<ICountryRepository, CountryRepository>()
       .AddScoped<IUserRepository, UserRepository>()
       .AddScoped<IEventRepository, EventRepository>()
-      .AddScoped<ICitylocation, LocationService>();
+      .AddScoped<ICitylocationService, LocationService>()
+      .AddScoped<IInvitationRepository, InvitationRepository>();
   }
 }

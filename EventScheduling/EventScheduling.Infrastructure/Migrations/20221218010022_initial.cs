@@ -91,6 +91,28 @@ namespace EventScheduling.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Invitation",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
+                    Status = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
+                    StartTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    EventId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invitation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Invitation_Event_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Event",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -178,6 +200,11 @@ namespace EventScheduling.Infrastructure.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Invitation_EventId",
+                table: "Invitation",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
@@ -196,7 +223,7 @@ namespace EventScheduling.Infrastructure.Migrations
                 name: "City");
 
             migrationBuilder.DropTable(
-                name: "Event");
+                name: "Invitation");
 
             migrationBuilder.DropTable(
                 name: "Users");
@@ -206,6 +233,9 @@ namespace EventScheduling.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Country");
+
+            migrationBuilder.DropTable(
+                name: "Event");
 
             migrationBuilder.DropTable(
                 name: "Team");
