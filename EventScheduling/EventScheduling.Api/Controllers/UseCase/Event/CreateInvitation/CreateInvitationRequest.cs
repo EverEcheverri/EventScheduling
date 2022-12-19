@@ -15,7 +15,7 @@ public class RequestCreateInvitation
   {
     return new CreateInvitationCommand
     {
-      Id = Guid.NewGuid(),
+      InvitationId = Guid.NewGuid(),
       EventId = EventId,
       Email = Email
     };

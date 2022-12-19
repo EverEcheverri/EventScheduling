@@ -24,5 +24,9 @@ public class CityEntityTypeConfiguration : IEntityTypeConfiguration<City>
     builder.Property(c => c.TimeZoneId)
       .IsRequired()
       .HasMaxLength(200);
+
+    builder.HasMany(e => e.Users).WithOne().IsRequired().OnDelete(DeleteBehavior.Cascade);
+    builder.Metadata.FindNavigation(nameof(City.Users))
+      .SetPropertyAccessMode(PropertyAccessMode.Field);
   }
 }

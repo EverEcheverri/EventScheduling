@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventScheduling.Infrastructure.Migrations
 {
     [DbContext(typeof(EventSchedulingDbContext))]
-    [Migration("20221218010022_initial")]
+    [Migration("20221219151519_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -233,12 +233,16 @@ namespace EventScheduling.Infrastructure.Migrations
 
             modelBuilder.Entity("EventScheduling.Domain.User.User", b =>
                 {
-                    b.Property<string>("Email")
-                        .HasMaxLength(254)
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("CityId")
-                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(254)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Mobile")
@@ -257,7 +261,9 @@ namespace EventScheduling.Infrastructure.Migrations
                     b.Property<Guid?>("TeamId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Email");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -269,56 +275,63 @@ namespace EventScheduling.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Email = "developer_one@yopmail.com",
+                            Id = new Guid("b2181377-6a51-446e-afb6-07f1402834e3"),
                             CityId = new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"),
+                            Email = "developer_one@yopmail.com",
                             Mobile = "111 1111111",
                             Name = "developer_one",
                             Role = 1
                         },
                         new
                         {
-                            Email = "developer_two@yopmail.com",
+                            Id = new Guid("4a76384b-d4c7-4e4f-9dd8-3ae32515804b"),
                             CityId = new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"),
+                            Email = "developer_two@yopmail.com",
                             Mobile = "222 2222222",
                             Name = "developer_two",
                             Role = 1
                         },
                         new
                         {
-                            Email = "developer_three@yopmail.com",
+                            Id = new Guid("c9caec51-5a70-480b-b8cb-9b37507e6727"),
                             CityId = new Guid("9b862593-628a-4bc1-8cc4-038e01f34241"),
+                            Email = "developer_three@yopmail.com",
                             Mobile = "333 3333333",
                             Name = "developer_three",
                             Role = 1
                         },
                         new
                         {
-                            Email = "developer_four@yopmail.com",
+                            Id = new Guid("140c7396-cb76-45ea-88c5-e709702dd927"),
                             CityId = new Guid("386a04f3-e4c4-4922-9e79-e75ac0fa3a6a"),
+                            Email = "developer_four@yopmail.com",
                             Mobile = "444 4444444",
                             Name = "developer_four",
                             Role = 1
                         },
                         new
                         {
-                            Email = "developer_five@yopmail.com",
+                            Id = new Guid("ad70475f-1821-405d-880b-151c9ae767ce"),
                             CityId = new Guid("102077ed-f0de-442c-8d97-fbb7dfd96d08"),
+                            Email = "developer_five@yopmail.com",
                             Mobile = "555 5555555",
                             Name = "developer_five",
                             Role = 1
                         },
                         new
                         {
-                            Email = "developer_six@yopmail.com",
+                            Id = new Guid("f75d4368-bbf5-4d50-97d7-baea7689f1e3"),
                             CityId = new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"),
+                            Email = "developer_six@yopmail.com",
                             Mobile = "666 6666666",
                             Name = "developer_six",
                             Role = 1
                         },
                         new
                         {
-                            Email = "qa_one@yopmail.com",
+                            Id = new Guid("50aeb858-723f-4b15-a3a1-6214f7e1b90c"),
                             CityId = new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"),
+                            Email = "qa_one@yopmail.com",
                             Mobile = "777 7777777",
                             Name = "qa_one",
                             Role = 2
@@ -400,9 +413,20 @@ namespace EventScheduling.Infrastructure.Migrations
 
             modelBuilder.Entity("EventScheduling.Domain.User.User", b =>
                 {
+                    b.HasOne("EventScheduling.Domain.City.City", null)
+                        .WithMany("Users")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EventScheduling.Domain.Team.Team", null)
                         .WithMany("Users")
                         .HasForeignKey("TeamId");
+                });
+
+            modelBuilder.Entity("EventScheduling.Domain.City.City", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("EventScheduling.Domain.Country.Country", b =>

@@ -52,14 +52,14 @@ public class EventSchedulingDbContext : DbContext
     modelBuilder.ApplyConfiguration(new EventEntityTypeConfiguration());
     modelBuilder.Entity<Invitation>().Configure();
 
-    var cities = InitialData.GetCities();
     var countries = InitialData.GetCountries();
+    var cities = InitialData.GetCities();
     var users = InitialData.GetUsers();
     var teams = InitialData.GetTeams();
     var userTeams = InitialData.GetUserTeams();
 
-    modelBuilder.Entity<Domain.City.City>().HasData(cities);
     modelBuilder.Entity<Domain.Country.Country>().HasData(countries);
+    modelBuilder.Entity<Domain.City.City>().HasData(cities);
     modelBuilder.Entity<Domain.User.User>().HasData(users);
     modelBuilder.Entity<Team>().HasData(teams);
     modelBuilder.Entity<UserTeam>().HasData(userTeams);
@@ -68,11 +68,6 @@ public class EventSchedulingDbContext : DbContext
   public string GetConnectionStringPath()
   {
     var relativePath = _configuration.GetConnectionString("DefaultConnection");
-    if (relativePath == null)
-    {
-      relativePath =
-        "C:\\Projects\\Code Challenge\\EventScheduling\\EventScheduling.Infrastructure\\event-schedulingdb";
-    }
     var absolutePath = Path.GetFullPath(relativePath!);
     return absolutePath;
   }

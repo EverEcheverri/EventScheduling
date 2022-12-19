@@ -23,13 +23,16 @@ public class InvitationRepository : IInvitationRepository
     return await _context.Invitation.FirstOrDefaultAsync(i => i.Id == invitationId, cancellationToken);
   }
 
-  public async Task<Invitation> GetByEventIdAndEmailAsync(Guid eventId, string email, CancellationToken cancellationToken)
+  public async Task<Invitation> GetByEventIdAndEmailAsync(Guid eventId, string email,
+    CancellationToken cancellationToken)
   {
-    return await _context.Invitation.FirstOrDefaultAsync(i => i.EventId == eventId, cancellationToken);
+    return await _context.Invitation.FirstOrDefaultAsync(i => i.EventId == eventId && i.Email == email,
+      cancellationToken);
   }
 
   public async Task UpdateAsync(Invitation invitation, CancellationToken cancellationToken)
   {
-    throw new NotImplementedException();
+    _context.Entry(invitation).State = EntityState.Modified;
+    await _context.SaveChangesAsync(cancellationToken);
   }
 }

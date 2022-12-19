@@ -50,13 +50,13 @@ internal static class InitialData
   {
     return new List<User>
     {
-      User.Build("developer_one@yopmail.com", "developer_one", MedellinId, "111 1111111", UserRoles.Developer),
-      User.Build("developer_two@yopmail.com", "developer_two", MedellinId, "222 2222222", UserRoles.Developer),
-      User.Build("developer_three@yopmail.com", "developer_three", BogotaId, "333 3333333", UserRoles.Developer),
-      User.Build("developer_four@yopmail.com", "developer_four", LimaId, "444 4444444", UserRoles.Developer),
-      User.Build("developer_five@yopmail.com", "developer_five", MontevideoId, "555 5555555", UserRoles.Developer),
-      User.Build("developer_six@yopmail.com", "developer_six", AsuncionId, "666 6666666", UserRoles.Developer),
-      User.Build("qa_one@yopmail.com", "qa_one", AsuncionId, "777 7777777", UserRoles.QAEngineer)
+      User.Build(Guid.Parse("b2181377-6a51-446e-afb6-07f1402834e3"),"developer_one@yopmail.com", "developer_one", MedellinId, "111 1111111", UserRoles.Developer),
+      User.Build(Guid.Parse("4a76384b-d4c7-4e4f-9dd8-3ae32515804b"),"developer_two@yopmail.com", "developer_two", MedellinId, "222 2222222", UserRoles.Developer),
+      User.Build(Guid.Parse("c9caec51-5a70-480b-b8cb-9b37507e6727"),"developer_three@yopmail.com", "developer_three", BogotaId, "333 3333333", UserRoles.Developer),
+      User.Build(Guid.Parse("140c7396-cb76-45ea-88c5-e709702dd927"),"developer_four@yopmail.com", "developer_four", LimaId, "444 4444444", UserRoles.Developer),
+      User.Build(Guid.Parse("ad70475f-1821-405d-880b-151c9ae767ce"),"developer_five@yopmail.com", "developer_five", MontevideoId, "555 5555555", UserRoles.Developer),
+      User.Build(Guid.Parse("f75d4368-bbf5-4d50-97d7-baea7689f1e3"),"developer_six@yopmail.com", "developer_six", AsuncionId, "666 6666666", UserRoles.Developer),
+      User.Build(Guid.Parse("50aeb858-723f-4b15-a3a1-6214f7e1b90c"),"qa_one@yopmail.com", "qa_one", AsuncionId, "777 7777777", UserRoles.QAEngineer)
     };
   }
 

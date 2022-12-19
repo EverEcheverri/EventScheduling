@@ -17,8 +17,7 @@
     <Folder Include="Event\Interfaces\" />
     <Folder Include="Event\Exceptions\" />
     <Folder Include="Event\UseCases\" />
-    <Folder Include="Invitation\Interfaces\" />
-    <Folder Include="Invitation\UseCases\" />
+    <Folder Include="Invitation\Exceptions\" />
     <Folder Include="User\Interfaces\" />
     <Folder Include="User\Exceptions\" />
     <Folder Include="User\UseCases\" />

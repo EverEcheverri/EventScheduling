@@ -30,6 +30,6 @@ public class InvitationController : ControllerBase
 
     await _createInvitation.ExecuteAsync(command, cancellationToken);
 
-    return StatusCode((int)HttpStatusCode.Created);
+    return StatusCode((int)HttpStatusCode.Created, command.InvitationId);
   }
 }

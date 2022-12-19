@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using EventScheduling.Domain.Event;
+﻿namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
 
-namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
+using Domain.Event;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 internal static class InvitationEntityTypeConfiguration
 {
@@ -29,13 +29,5 @@ internal static class InvitationEntityTypeConfiguration
     builder.Property(p => p.EndTime)
       .HasColumnName(nameof(Invitation.EndTime))
       .HasConversion(p => p, p => DateTime.SpecifyKind(p, DateTimeKind.Local));
-
-    /*
-   public Guid Id { get; set; }
-   public string Email { get; set; }
-   public string Status { get; set; }
-   public DateTime StartTime { get; set; }
-   public DateTime EndTime { get; set; }
-     */
   }
 }

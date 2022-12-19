@@ -24,7 +24,6 @@
     <Folder Include="User\Enums\" />
     <Folder Include="User\Exceptions\" />
     <Folder Include="User\Commands\" />
-    <Folder Include="User\Queries\" />
     <Folder Include="User\Repositories\" />
   </ItemGroup>
 

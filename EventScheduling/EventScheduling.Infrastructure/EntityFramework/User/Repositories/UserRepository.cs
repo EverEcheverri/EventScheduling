@@ -24,23 +24,40 @@ public class UserRepository : IUserRepository
   public async Task<User?> GetByEmailAsync(Email email, CancellationToken cancellationToken)
   {
     cancellationToken.ThrowIfCancellationRequested();
-    return await _context.User.FirstOrDefaultAsync(u => u.Email == email, cancellationToken: cancellationToken);
-  }
 
+    return await _context.User
+      .FirstOrDefaultAsync(u => u.Email == email, cancellationToken: cancellationToken);
+  }
+  public async Task<GetWithCityQuery> GetWithTimeZoneIdAsync(Email email, CancellationToken cancellationToken)
+  {
+    var query = from u in _context.User
+                join ci in _context.City
+                  on u.CityId equals ci.Id
+                where u.Email == email
+                select new GetWithCityQuery
+                {
+                  Email = u.Email,
+                  TimeZoneId = ci.TimeZoneId
+                };
+
+    var userWithTimeZoneId = await query.SingleOrDefaultAsync(cancellationToken).ConfigureAwait(false);
+
+    return userWithTimeZoneId;
+  }
   public async Task<ICollection<GetByCountryQuery>> GetByCountryIdAsync(Guid countryId,
     CancellationToken cancellationToken)
   {
     var query = from u in _context.User
-      join ci in _context.City
-        on u.CityId equals ci.Id
-      where ci.CountryId == countryId
-      select new GetByCountryQuery
-      {
-        UserName = u.Name,
-        Email = u.Email,
-        Role = u.Role,
-        CityName = ci.Name
-      };
+                join ci in _context.City
+                  on u.CityId equals ci.Id
+                where ci.CountryId == countryId
+                select new GetByCountryQuery
+                {
+                  UserName = u.Name,
+                  Email = u.Email,
+                  Role = u.Role,
+                  CityName = ci.Name
+                };
 
     var userByCountry = await query.ToListAsync(cancellationToken).ConfigureAwait(false);
 

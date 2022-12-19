@@ -25,6 +25,7 @@ public class RequestCreateUser
   {
     return new CreateUserCommand
     {
+      Id = Guid.NewGuid(),
       Email = Email,
       Name = Name,
       CityId = CityId,

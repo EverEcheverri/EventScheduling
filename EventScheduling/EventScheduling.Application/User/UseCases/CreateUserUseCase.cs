@@ -23,7 +23,7 @@ public class CreateUserUseCase : ICreateUser
       throw new UserEmailAlreadyExistException(createUserCommand.Email);
     }
 
-    var newUser = User.Build(createUserCommand.Email, createUserCommand.Name, createUserCommand.CityId,
+    var newUser = User.Build(createUserCommand.Id, createUserCommand.Email, createUserCommand.Name, createUserCommand.CityId,
       createUserCommand.Mobile, createUserCommand.Role);
     await _userRepository.SaveAsync(newUser, cancellationToken);
   }

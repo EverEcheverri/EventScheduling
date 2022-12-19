@@ -34,7 +34,7 @@ namespace EventScheduling.Api.Controllers.UseCase.Event.Create
 
       await _createEvent.ExecuteAsync(command, cancellationToken);
 
-      return StatusCode((int)HttpStatusCode.Created);
+      return StatusCode((int)HttpStatusCode.Created, command.Id);
     }
   }
 }

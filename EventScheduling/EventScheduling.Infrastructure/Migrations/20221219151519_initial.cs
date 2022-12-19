@@ -95,11 +95,11 @@ namespace EventScheduling.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    EventId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
                     Status = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
                     StartTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EventId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    EndTime = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,16 +116,23 @@ namespace EventScheduling.Infrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", maxLength: 254, nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    CityId = table.Column<Guid>(type: "TEXT", maxLength: 255, nullable: false),
                     Mobile = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
                     Role = table.Column<int>(type: "INTEGER", nullable: false),
+                    CityId = table.Column<Guid>(type: "TEXT", nullable: false),
                     TeamId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Email);
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_City_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Users_Team_TeamId",
                         column: x => x.TeamId,
@@ -169,20 +176,6 @@ namespace EventScheduling.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Email", "CityId", "Mobile", "Name", "Role", "TeamId" },
-                values: new object[,]
-                {
-                    { "developer_five@yopmail.com", new Guid("102077ed-f0de-442c-8d97-fbb7dfd96d08"), "555 5555555", "developer_five", 1, null },
-                    { "developer_four@yopmail.com", new Guid("386a04f3-e4c4-4922-9e79-e75ac0fa3a6a"), "444 4444444", "developer_four", 1, null },
-                    { "developer_one@yopmail.com", new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"), "111 1111111", "developer_one", 1, null },
-                    { "developer_six@yopmail.com", new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"), "666 6666666", "developer_six", 1, null },
-                    { "developer_three@yopmail.com", new Guid("9b862593-628a-4bc1-8cc4-038e01f34241"), "333 3333333", "developer_three", 1, null },
-                    { "developer_two@yopmail.com", new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"), "222 2222222", "developer_two", 1, null },
-                    { "qa_one@yopmail.com", new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"), "777 7777777", "qa_one", 2, null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "City",
                 columns: new[] { "Id", "CountryId", "Name", "TimeZoneId" },
                 values: new object[,]
@@ -194,6 +187,20 @@ namespace EventScheduling.Infrastructure.Migrations
                     { new Guid("9b862593-628a-4bc1-8cc4-038e01f34241"), new Guid("8217f508-c17d-431e-9cf0-05ca8984971b"), "Bogota", "America/Bogota" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CityId", "Email", "Mobile", "Name", "Role", "TeamId" },
+                values: new object[,]
+                {
+                    { new Guid("140c7396-cb76-45ea-88c5-e709702dd927"), new Guid("386a04f3-e4c4-4922-9e79-e75ac0fa3a6a"), "developer_four@yopmail.com", "444 4444444", "developer_four", 1, null },
+                    { new Guid("4a76384b-d4c7-4e4f-9dd8-3ae32515804b"), new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"), "developer_two@yopmail.com", "222 2222222", "developer_two", 1, null },
+                    { new Guid("50aeb858-723f-4b15-a3a1-6214f7e1b90c"), new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"), "qa_one@yopmail.com", "777 7777777", "qa_one", 2, null },
+                    { new Guid("ad70475f-1821-405d-880b-151c9ae767ce"), new Guid("102077ed-f0de-442c-8d97-fbb7dfd96d08"), "developer_five@yopmail.com", "555 5555555", "developer_five", 1, null },
+                    { new Guid("b2181377-6a51-446e-afb6-07f1402834e3"), new Guid("5ebf0600-c390-4b16-945d-eb0e734cf51c"), "developer_one@yopmail.com", "111 1111111", "developer_one", 1, null },
+                    { new Guid("c9caec51-5a70-480b-b8cb-9b37507e6727"), new Guid("9b862593-628a-4bc1-8cc4-038e01f34241"), "developer_three@yopmail.com", "333 3333333", "developer_three", 1, null },
+                    { new Guid("f75d4368-bbf5-4d50-97d7-baea7689f1e3"), new Guid("0de67652-5cc0-42ca-8005-aa41b3a41802"), "developer_six@yopmail.com", "666 6666666", "developer_six", 1, null }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_City_CountryId",
                 table: "City",
@@ -203,6 +210,11 @@ namespace EventScheduling.Infrastructure.Migrations
                 name: "IX_Invitation_EventId",
                 table: "Invitation",
                 column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_CityId",
+                table: "Users",
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
@@ -220,9 +232,6 @@ namespace EventScheduling.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "City");
-
-            migrationBuilder.DropTable(
                 name: "Invitation");
 
             migrationBuilder.DropTable(
@@ -232,13 +241,16 @@ namespace EventScheduling.Infrastructure.Migrations
                 name: "UserTeam");
 
             migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.DropTable(
                 name: "Event");
 
             migrationBuilder.DropTable(
+                name: "City");
+
+            migrationBuilder.DropTable(
                 name: "Team");
+
+            migrationBuilder.DropTable(
+                name: "Country");
         }
     }
 }

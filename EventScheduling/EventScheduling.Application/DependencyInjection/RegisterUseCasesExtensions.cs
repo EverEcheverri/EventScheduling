@@ -22,6 +22,7 @@ public static class RegisterUseCasesExtensions
       .AddScoped<ICreateUser, CreateUserUseCase>()
       .AddScoped<IGetByCountry, GetByCountryUseCase>()
       .AddScoped<ICreateEvent, CreateEventUseCase>()
-      .AddScoped<ICreateInvitation, CreateInvitationUseCase>();
+      .AddScoped<ICreateInvitation, CreateInvitationUseCase>()
+      .AddScoped<IUpdateInvitation, UpdateInvitationUseCase>();
   }
 }
