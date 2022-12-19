@@ -4,7 +4,7 @@ using Application.Country.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Middleware;
 
-[Route("api/[controller]")]
+[Route("api/country")]
 [ApiController]
 public class CountryController : ControllerBase
 {

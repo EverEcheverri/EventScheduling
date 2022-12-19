@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace EventScheduling.Api.Controllers.UseCase.Event.UpdateStatus
+﻿namespace EventScheduling.Api.Controllers.UseCase.Invitation.UpdateStatus
 {
   using System.ComponentModel.DataAnnotations;
   using System.Net;
   using Application.Invitation.Interfaces;
-  using CreateInvitation;
-  using EventScheduling.Domain.Event.Commands;
+  using Microsoft.AspNetCore.Mvc;
   using Middleware;
 
-  [Route("api/[controller]")]
+  [Route("api/invitation")]
   [ApiController]
   public class InvitationController : ControllerBase
   {

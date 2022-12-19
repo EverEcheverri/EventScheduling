@@ -11,7 +11,7 @@ namespace EventScheduling.Api.Controllers.UseCase.Event.Create
   using Middleware;
   using User.Create;
 
-  [Route("api/[controller]")]
+  [Route("api/event")]
   [ApiController]
   public class EventController : ControllerBase
   {

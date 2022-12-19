@@ -17,6 +17,7 @@
     <Folder Include="City\Exceptions\" />
     <Folder Include="Country\Repositories\" />
     <Folder Include="Event\Enums\" />
+    <Folder Include="Event\Queries\" />
     <Folder Include="Event\Repositories\" />
     <Folder Include="LocationService\" />
     <Folder Include="UserTeam\" />

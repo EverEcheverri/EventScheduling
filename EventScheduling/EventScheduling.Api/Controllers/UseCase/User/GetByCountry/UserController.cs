@@ -1,9 +1,10 @@
 ﻿namespace EventScheduling.Api.Controllers.UseCase.User.GetByCountry;
 
+using System.ComponentModel.DataAnnotations;
 using Application.User.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/[controller]")]
+[Route("api/user")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -16,7 +17,7 @@ public class UserController : ControllerBase
 
   [HttpGet("countryName")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseGetUsersByCountryName>))]
-  public async Task<IActionResult> GetByCountry(string countryName, CancellationToken cancellationToken)
+  public async Task<IActionResult> GetByCountry([Required] string countryName, CancellationToken cancellationToken)
   {
     var users = await _getByCountry.ExecuteAsync(countryName, cancellationToken);
     return Ok(ResponseGetUsersByCountryName.Map(users));

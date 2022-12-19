@@ -6,4 +6,6 @@ public interface IEventRepository
   Task<Event> GetByIdAsync(Guid eventId, CancellationToken cancellationToken);
   Task<Event?> GetByNameAsync(string eventName, CancellationToken cancellationToken);
   Task UpdateAsync(Event @event, CancellationToken cancellationToken);
+
+  Task<Event> GetByIdWithInvitationsAsync(Guid eventId, CancellationToken cancellationToken);
 }

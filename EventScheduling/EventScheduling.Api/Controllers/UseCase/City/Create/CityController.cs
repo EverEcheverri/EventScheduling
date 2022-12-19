@@ -7,7 +7,7 @@ using EventScheduling.Api.Middleware;
 using EventScheduling.Application.City.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/[controller]")]
+[Route("api/city")]
 [ApiController]
 public class CityController : ControllerBase
 {

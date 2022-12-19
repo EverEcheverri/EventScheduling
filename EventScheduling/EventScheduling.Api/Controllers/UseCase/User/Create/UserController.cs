@@ -6,7 +6,7 @@ using Application.User.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Middleware;
 
-[Route("api/[controller]")]
+[Route("api/user")]
 [ApiController]
 public class UserController : ControllerBase
 {

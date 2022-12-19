@@ -53,6 +53,12 @@ public class EventRepository : IEventRepository
   public async Task<Event> GetByIdAsync(Guid eventId, CancellationToken cancellationToken)
   {
     return (await _context.Event
+      .FirstOrDefaultAsync(u => u.Id == eventId, cancellationToken))!;
+  }
+
+  public async Task<Event> GetByIdWithInvitationsAsync(Guid eventId, CancellationToken cancellationToken)
+  {
+    return (await _context.Event
       .Include(e => e.Invitation)
       .FirstOrDefaultAsync(u => u.Id == eventId, cancellationToken))!;
   }

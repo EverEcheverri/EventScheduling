@@ -1,12 +1,12 @@
-﻿namespace EventScheduling.Api.Controllers.UseCase.Event.CreateInvitation;
+﻿namespace EventScheduling.Api.Controllers.UseCase.Invitation.Create;
 
 using System.ComponentModel.DataAnnotations;
 using System.Net;
-using Application.Invitation.Interfaces;
+using EventScheduling.Api.Middleware;
+using EventScheduling.Application.Invitation.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Middleware;
 
-[Route("api/[controller]")]
+[Route("api/invitation")]
 [ApiController]
 public class InvitationController : ControllerBase
 {

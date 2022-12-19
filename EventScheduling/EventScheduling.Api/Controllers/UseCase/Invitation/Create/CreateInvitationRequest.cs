@@ -1,7 +1,7 @@
-﻿namespace EventScheduling.Api.Controllers.UseCase.Event.CreateInvitation;
+﻿namespace EventScheduling.Api.Controllers.UseCase.Invitation.Create;
 
 using System.ComponentModel.DataAnnotations;
-using Domain.Event.Commands;
+using EventScheduling.Domain.Event.Commands;
 
 public class RequestCreateInvitation
 {

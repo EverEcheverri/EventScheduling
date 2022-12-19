@@ -1,4 +1,4 @@
-﻿namespace EventScheduling.Api.Controllers.UseCase.Event.UpdateStatus;
+﻿namespace EventScheduling.Api.Controllers.UseCase.Invitation.UpdateStatus;
 
 using System.ComponentModel.DataAnnotations;
 using Domain.Event.Commands;
