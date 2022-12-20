@@ -1,4 +1,4 @@
-﻿namespace EventScheduling.Domain.Country;
+namespace EventScheduling.Domain.Country;
 
 using City;
 using SharedKernel.Exceptions;
@@ -19,6 +19,11 @@ public sealed class Country
 
   public static Country Build(Guid id, string name)
   {
+    if (!Guid.TryParse(id.ToString(), out _))
+    {
+      throw new NoValidIdException();
+    }
+
     if (name == null)
     {
       throw new NameNullOrEmptyException();

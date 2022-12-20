@@ -1,4 +1,4 @@
-﻿namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
+namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
 
 using Domain.Country;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +11,10 @@ public class CountryEntityTypeConfiguration : IEntityTypeConfiguration<Country>
     builder.ToTable("Country")
       .HasKey(c => c.Id);
 
-    builder.Property(c => c.Id).HasConversion<Guid>();
+    builder.Property(c => c.Id).HasConversion<Guid>()
+      .IsRequired();
 
     builder.Property(c => c.Name)
-      .HasColumnName("Name")
       .IsRequired()
       .HasMaxLength(100);
 

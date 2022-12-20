@@ -1,4 +1,4 @@
-﻿namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
+namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
 
 using Domain.City;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +11,22 @@ public class CityEntityTypeConfiguration : IEntityTypeConfiguration<City>
     builder.ToTable("City")
       .HasKey(c => c.Id);
 
-    builder.Property(c => c.Id).HasConversion<Guid>();
+    builder.Property(c => c.Id).HasConversion<Guid>()
+      .IsRequired();
+
+    builder.Property(c => c.CountryId).HasConversion<Guid>()
+      .IsRequired();
 
     builder.Property(c => c.Name)
-      .HasColumnName("Name")
       .IsRequired()
       .HasMaxLength(200);
+
+    builder.Property(c => c.TimeZoneId)
+      .IsRequired()
+      .HasMaxLength(200);
+
+    builder.HasMany(e => e.Users).WithOne().IsRequired().OnDelete(DeleteBehavior.Cascade);
+    builder.Metadata.FindNavigation(nameof(City.Users))
+      .SetPropertyAccessMode(PropertyAccessMode.Field);
   }
 }
