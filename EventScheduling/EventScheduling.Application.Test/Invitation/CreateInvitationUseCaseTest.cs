@@ -1,17 +1,16 @@
 ﻿namespace EventScheduling.Application.Test.Invitation;
 
 using Application.Event.Exceptions;
+using Application.Invitation.Exceptions;
 using Application.Invitation.Interfaces;
 using Application.Invitation.UseCases;
+using Application.User.Exceptions;
 using Domain.Event;
 using Domain.Event.Enums;
 using Domain.Event.Repositories;
 using Domain.User.Queries;
 using Domain.User.Repositories;
 using Domain.User.ValueObjects;
-using EventScheduling.Application.Invitation.Exceptions;
-using EventScheduling.Application.User.Exceptions;
-using EventScheduling.Domain.User;
 using EventScheduling.Test.Data.Commands;
 using EventScheduling.Test.Data.Event;
 using Moq;
@@ -45,9 +44,11 @@ public class CreateInvitationUseCaseTest
     };
     var command = CreateInvitationCommandMother.Create();
     var userLocalStartTime =
-      TimeZoneInfo.ConvertTimeFromUtc(@event.StartTimeUtc, TimeZoneInfo.FindSystemTimeZoneById(userWithTimeZone.TimeZoneId));
+      TimeZoneInfo.ConvertTimeFromUtc(@event.StartTimeUtc,
+        TimeZoneInfo.FindSystemTimeZoneById(userWithTimeZone.TimeZoneId));
     var userLocalEndTime =
-      TimeZoneInfo.ConvertTimeFromUtc(@event.EndTimeUtc, TimeZoneInfo.FindSystemTimeZoneById(userWithTimeZone.TimeZoneId));
+      TimeZoneInfo.ConvertTimeFromUtc(@event.EndTimeUtc,
+        TimeZoneInfo.FindSystemTimeZoneById(userWithTimeZone.TimeZoneId));
 
 
     _eventRepositoryMock.Setup(e => e.GetByIdAsync(It.IsAny<Guid>(), CancellationToken.None))
