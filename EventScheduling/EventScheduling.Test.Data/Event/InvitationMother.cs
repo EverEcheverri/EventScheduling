@@ -23,13 +23,11 @@ public static class InvitationMother
       endTime = DateTime.Parse("2022-01-01T14:00:00.0000000Z").ToUniversalTime();
     }
 
-    var invitation = Invitation.Build(
+    return Invitation.Build(
       Guid.Parse(id),
       email,
       status,
       startTime,
       endTime);
-
-    return invitation;
   }
 }
