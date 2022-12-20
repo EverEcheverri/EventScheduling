@@ -16,13 +16,13 @@ public class CountryController : ControllerBase
   }
 
   [HttpGet]
-  [Route("name")]
+  [Route("name/with/Cities")]
   [ProducesResponseType(StatusCodes.Status201Created)]
   [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status400BadRequest)]
   [ProducesResponseType(typeof(CustomErrorResponse), StatusCodes.Status500InternalServerError)]
-  public async Task<IActionResult> GetCountryByName(string name, CancellationToken cancellationToken)
+  public async Task<IActionResult> GetCountryByName(string countryName, CancellationToken cancellationToken)
   {
-    var countries = await _getCountryByName.ExecuteAsync(name, cancellationToken);
+    var countries = await _getCountryByName.ExecuteAsync(countryName, cancellationToken);
 
     return Ok(countries);
   }

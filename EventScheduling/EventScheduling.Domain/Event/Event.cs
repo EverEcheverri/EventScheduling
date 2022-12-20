@@ -4,7 +4,7 @@ using Enums;
 
 public sealed class Event
 {
-  private readonly List<Invitation> _invitation = new List<Invitation>();
+  private readonly List<Invitation> _invitation = new();
   private Event(Guid id, string name, string description, EventType eventType, DateTime startTimeUtc,
     DateTime endTimeUtc, Guid cityId, Guid countryId, string utcOffset, double latitude, double longitude)
   {

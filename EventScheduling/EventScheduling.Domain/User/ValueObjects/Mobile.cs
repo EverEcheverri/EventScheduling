@@ -9,7 +9,7 @@ public sealed class Mobile
   private const short ValueMinLength = 10;
 
   private static readonly Regex MobileNumberRegex =
-    new(@"^[a-zA-Z0-9_\s:.-]*$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(250));
+    new(@"^[0-9_\s:.-]*$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(250));
 
   private readonly string _mobile;
 
@@ -22,7 +22,7 @@ public sealed class Mobile
 
     switch (mobile.Length)
     {
-      case < ValueMinLength:
+      case <= ValueMinLength:
         throw new MobileNumberMinLengthException(ValueMinLength);
       case > ValueMaxLength:
         throw new MobileNumberMaxLengthException(ValueMaxLength);

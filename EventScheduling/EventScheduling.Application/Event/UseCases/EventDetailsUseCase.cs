@@ -1,11 +1,9 @@
-﻿using EventScheduling.Application.Event.Interfaces;
-
-namespace EventScheduling.Application.Event.UseCases;
+﻿namespace EventScheduling.Application.Event.UseCases;
 
 using Domain.Event;
-using Domain.Event.Queries;
-using EventScheduling.Application.Event.Exceptions;
-using EventScheduling.Domain.Event.Repositories;
+using Domain.Event.Repositories;
+using Exceptions;
+using Interfaces;
 
 public class EventDetailsUseCase : IEventDetails
 {
@@ -14,7 +12,7 @@ public class EventDetailsUseCase : IEventDetails
   public EventDetailsUseCase(IEventRepository eventRepository)
   {
     _eventRepository = eventRepository;
-  } 
+  }
 
   public async Task<Event> ExecuteAsync(Guid eventId, CancellationToken cancellationToken)
   {
@@ -23,6 +21,7 @@ public class EventDetailsUseCase : IEventDetails
     {
       throw new EventDoesNotExistException(eventId);
     }
+
     return @event;
   }
 }

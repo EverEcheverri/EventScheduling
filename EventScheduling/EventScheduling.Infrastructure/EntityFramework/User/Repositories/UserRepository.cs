@@ -28,6 +28,7 @@ public class UserRepository : IUserRepository
     return await _context.User
       .FirstOrDefaultAsync(u => u.Email == email, cancellationToken: cancellationToken);
   }
+
   public async Task<GetWithCityQuery> GetWithTimeZoneIdAsync(Email email, CancellationToken cancellationToken)
   {
     var query = from u in _context.User

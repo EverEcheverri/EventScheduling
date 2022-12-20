@@ -26,9 +26,7 @@ public class CreateEventUseCase : ICreateEvent
 
   public async Task ExecuteAsync(CreateEventCommand createEventCommand, CancellationToken cancellationToken)
   {
-    var currentUtcTime = DateTime.UtcNow;
-
-    if (createEventCommand.StartTimeUtc < currentUtcTime)
+    if (createEventCommand.StartTimeUtc < DateTime.UtcNow)
     {
       throw new CannotCreateEventInPastTimeException(createEventCommand.StartTimeUtc);
     }
@@ -47,7 +45,7 @@ public class CreateEventUseCase : ICreateEvent
 
     if (createEventCommand.EventType == EventType.Face2Face)
     {
-      var cityLocationResult = await _cityLocation.IGetCityLocationAsync(city.Name, cancellationToken);
+      var cityLocationResult = await _cityLocation.GetCityLocationAsync(city.Name, cancellationToken);
       countryId = city.CountryId;
       utcOffset = cityLocationResult.location.utc_offset;
       latitude = double.Parse(cityLocationResult.location.lat);

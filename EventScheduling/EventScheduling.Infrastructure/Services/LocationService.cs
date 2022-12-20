@@ -20,7 +20,7 @@ public class LocationService : ICitylocationService
     _client = httpClientFactory.CreateClient("Weatherstack");
   }
 
-  public async Task<ResponseGetCityLocation> IGetCityLocationAsync(string cityName, CancellationToken cancellationToken)
+  public async Task<ResponseGetCityLocation> GetCityLocationAsync(string cityName, CancellationToken cancellationToken)
   {
     cancellationToken.ThrowIfCancellationRequested();
     var accessKey = _configuration.GetSection("LocationService:AccessKey").Value;
@@ -43,7 +43,7 @@ public class LocationService : ICitylocationService
     }
     catch (Exception ex)
     {
-      _logger.LogError(ex, $"An error has occurred calling IGetCityLocationAsync: {ex.Message}");
+      _logger.LogError(ex, $"An error has occurred calling GetCityLocationAsync: {ex.Message}");
       throw;
     }
   }
