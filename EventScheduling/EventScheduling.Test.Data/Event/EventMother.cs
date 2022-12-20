@@ -29,7 +29,7 @@ public static class EventMother
       endTimeUtc = DateTime.Parse("2022-01-01T19:00:00.0000000Z").ToUniversalTime();
     }
 
-    var @event = Event.Build(
+    return Event.Build(
       Guid.Parse(id),
       name,
       description,
@@ -42,7 +42,5 @@ public static class EventMother
       latitude,
       longitude
     );
-
-    return @event;
   }
 }
