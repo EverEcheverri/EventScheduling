@@ -1,4 +1,4 @@
-﻿namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
+namespace EventScheduling.Infrastructure.EntityFramework.Configurations;
 
 using Domain.Team;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +14,6 @@ public class TeamEntityTypeConfiguration : IEntityTypeConfiguration<Team>
     builder.Property(c => c.Id).HasConversion<Guid>();
 
     builder.Property(c => c.Name)
-      .HasColumnName("Name")
       .IsRequired()
       .HasMaxLength(100);
   }
