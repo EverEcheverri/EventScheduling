@@ -15,6 +15,7 @@ public class CityRepository : ICityRepository
 
   public async Task SaveAsync(City city, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     await _context.City.AddAsync(city, cancellationToken);
     await _context.SaveChangesAsync(cancellationToken);
   }

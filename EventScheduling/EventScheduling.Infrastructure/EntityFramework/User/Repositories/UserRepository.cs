@@ -17,6 +17,7 @@ public class UserRepository : IUserRepository
 
   public async Task SaveAsync(User user, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     await _context.User.AddAsync(user, cancellationToken);
     await _context.SaveChangesAsync(cancellationToken);
   }
@@ -31,6 +32,7 @@ public class UserRepository : IUserRepository
 
   public async Task<GetWithCityQuery> GetWithTimeZoneIdAsync(Email email, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var query = from u in _context.User
                 join ci in _context.City
                   on u.CityId equals ci.Id
@@ -48,6 +50,7 @@ public class UserRepository : IUserRepository
   public async Task<ICollection<GetByCountryQuery>> GetByCountryIdAsync(Guid countryId,
     CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var query = from u in _context.User
                 join ci in _context.City
                   on u.CityId equals ci.Id

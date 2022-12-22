@@ -16,6 +16,7 @@ public class EventDetailsUseCase : IEventDetails
 
   public async Task<Event> ExecuteAsync(Guid eventId, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var @event = await _eventRepository.GetByIdWithInvitationsAsync(eventId, cancellationToken);
     if (@event == null)
     {

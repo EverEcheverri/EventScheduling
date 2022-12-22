@@ -27,6 +27,7 @@ public class CreateInvitationUseCase : ICreateInvitation
 
   public async Task ExecuteAsync(CreateInvitationCommand invitationCommand, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var @event = await _eventRepository.GetByIdAsync(invitationCommand.EventId, cancellationToken);
     if (@event == null)
     {

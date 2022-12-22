@@ -26,6 +26,7 @@ public class CreateEventUseCase : ICreateEvent
 
   public async Task ExecuteAsync(CreateEventCommand createEventCommand, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     if (createEventCommand.StartTimeUtc < DateTime.UtcNow)
     {
       throw new CannotCreateEventInPastTimeException(createEventCommand.StartTimeUtc);

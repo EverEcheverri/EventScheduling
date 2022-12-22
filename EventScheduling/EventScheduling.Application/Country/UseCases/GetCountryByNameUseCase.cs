@@ -15,6 +15,7 @@ public class GetCountryByNameUseCase : IGetCountryByName
 
   public async Task<Country> ExecuteAsync(string name, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     return await _countryRepository.GetByNameAsync(name, cancellationToken);
   }
 }

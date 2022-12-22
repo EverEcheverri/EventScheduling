@@ -17,12 +17,14 @@ public class EventRepository : IEventRepository
 
   public async Task SaveAsync(Event @event, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     await _context.Event.AddAsync(@event, cancellationToken);
     await _context.SaveChangesAsync(cancellationToken);
   }
 
   public async Task UpdateAsync(Event @event, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     try
     {
       foreach (var invitation in @event.Invitation)
@@ -52,12 +54,14 @@ public class EventRepository : IEventRepository
 
   public async Task<Event> GetByIdAsync(Guid eventId, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     return (await _context.Event
       .FirstOrDefaultAsync(u => u.Id == eventId, cancellationToken))!;
   }
 
   public async Task<Event> GetByIdWithInvitationsAsync(Guid eventId, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     return (await _context.Event
       .Include(e => e.Invitation)
       .FirstOrDefaultAsync(u => u.Id == eventId, cancellationToken))!;
@@ -65,6 +69,7 @@ public class EventRepository : IEventRepository
 
   public async Task<Event?> GetByNameAsync(string eventName, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     return await _context.Event.FirstOrDefaultAsync(u => u.Name == eventName, cancellationToken);
   }
 }

@@ -15,6 +15,7 @@ public class CountryRepository : ICountryRepository
 
   public async Task<Country> GetByNameAsync(string name, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var countryResultAsync =
       await _context.Country
         .Include(c => c.Cities)

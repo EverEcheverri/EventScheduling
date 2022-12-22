@@ -17,6 +17,7 @@ public class CreateUserUseCase : ICreateUser
 
   public async Task ExecuteAsync(CreateUserCommand createUserCommand, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var user = await _userRepository.GetByEmailAsync(createUserCommand.Email, cancellationToken);
     if (user != null)
     {

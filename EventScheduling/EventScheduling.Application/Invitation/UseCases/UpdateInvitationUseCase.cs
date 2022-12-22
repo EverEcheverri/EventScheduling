@@ -16,6 +16,7 @@ public class UpdateInvitationUseCase : IUpdateInvitation
 
   public async Task ExecuteAsync(UpdateInvitationCommand invitationCommand, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var invitation = await _invitationRepository.GetByIdAsync(invitationCommand.InvitationId, cancellationToken);
     if (invitation == null)
     {

@@ -17,6 +17,7 @@ public class CreateCityUseCase : ICreateCity
 
   public async Task ExecuteAsync(CreateCityCommand createCityCommand, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var city = _cityRepository.GetByNameAsync(createCityCommand.Name, cancellationToken);
     if (city != null)
     {

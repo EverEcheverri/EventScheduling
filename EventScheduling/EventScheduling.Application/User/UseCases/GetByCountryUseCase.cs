@@ -19,6 +19,7 @@ public class GetByCountryUseCase : IGetByCountry
   public async Task<ICollection<GetByCountryQuery>> ExecuteAsync(string countryName,
     CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
     var country = await _countryRepository.GetByNameAsync(countryName, cancellationToken);
 
     var users = await _userRepository.GetByCountryIdAsync(country.Id, cancellationToken);
