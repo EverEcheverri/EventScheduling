@@ -12,8 +12,8 @@ public sealed class Team
     Name = name;
   }
 
-  public Guid Id { get; set; }
-  public string Name { get; set; }
+  public Guid Id { get; }
+  public string Name { get; }
   public IReadOnlyCollection<User> Users => _users;
 
   public static Team Build(Guid id, string name)

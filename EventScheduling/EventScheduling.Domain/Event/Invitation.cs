@@ -1,10 +1,9 @@
-﻿using EventScheduling.Domain.Event.Enums;
+﻿namespace EventScheduling.Domain.Event;
 
-namespace EventScheduling.Domain.Event;
+using Enums;
 
 public sealed class Invitation
 {
-  public Guid EventId { get; set; }
   private Invitation(Guid id, string email, InvitationStatus status, DateTime startTime, DateTime endTime)
   {
     Id = id;
@@ -14,8 +13,10 @@ public sealed class Invitation
     EndTime = endTime;
   }
 
-  public Guid Id { get; set; }
-  public string Email { get; set; }
+  public Guid EventId { get; set; }
+
+  public Guid Id { get; }
+  public string Email { get; }
   public InvitationStatus Status { get; private set; }
   public DateTime StartTime { get; private set; }
   public DateTime EndTime { get; private set; }

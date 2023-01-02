@@ -11,8 +11,8 @@ public sealed class UserTeam
     Email = email;
   }
 
-  public Guid TeamId { get; set; }
-  public string Email { get; set; }
+  public Guid TeamId { get; }
+  public string Email { get; }
 
   public static UserTeam Build(Guid teamId, string email)
   {

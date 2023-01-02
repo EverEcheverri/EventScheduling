@@ -5,6 +5,7 @@ using Enums;
 public sealed class Event
 {
   private readonly List<Invitation> _invitation = new();
+
   private Event(Guid id, string name, string description, EventType eventType, DateTime startTimeUtc,
     DateTime endTimeUtc, Guid cityId, Guid countryId, string utcOffset, double latitude, double longitude)
   {
@@ -21,17 +22,17 @@ public sealed class Event
     Longitude = longitude;
   }
 
-  public Guid Id { get; set; }
-  public string Name { get; set; }
-  public string Description { get; set; }
-  public EventType EventType { get; set; }
-  public DateTime StartTimeUtc { get; set; }
-  public DateTime EndTimeUtc { get; set; }
-  public Guid CityId { get; set; }
-  public Guid CountryId { get; set; }
-  public string UtcOffset { get; set; }
-  public double Latitude { get; set; }
-  public double Longitude { get; set; }
+  public Guid Id { get; }
+  public string Name { get; }
+  public string Description { get; }
+  public EventType EventType { get; }
+  public DateTime StartTimeUtc { get; }
+  public DateTime EndTimeUtc { get; }
+  public Guid CityId { get; }
+  public Guid CountryId { get; }
+  public string UtcOffset { get; }
+  public double Latitude { get; }
+  public double Longitude { get; }
   public IReadOnlyCollection<Invitation> Invitation => _invitation;
 
   public static Event Build(Guid id, string name, string description, EventType eventType, DateTime startTimeUtc,

@@ -13,8 +13,8 @@ public sealed class Country
     Name = name;
   }
 
-  public Guid Id { get; set; }
-  public string Name { get; set; }
+  public Guid Id { get; }
+  public string Name { get; }
   public IReadOnlyCollection<City> Cities => _cities;
 
   public static Country Build(Guid id, string name)
