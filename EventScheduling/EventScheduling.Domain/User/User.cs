@@ -16,12 +16,12 @@ public sealed class User
     CityId = cityId;
   }
 
-  public Guid Id { get; }
-  public Email Email { get; }
-  public UserName Name { get; }
-  public Mobile Mobile { get; }
-  public UserRoles Role { get; }
-  public Guid CityId { get; }
+  public Guid Id { get; private set; }
+  public Email Email { get; private set; }
+  public UserName Name { get; private set; }
+  public Mobile Mobile { get; private set; }
+  public UserRoles Role { get; private set; }
+  public Guid CityId { get; private set; }
 
   public static User Build(Guid id, Email email, UserName name, Guid cityId, Mobile mobile, UserRoles role)
   {

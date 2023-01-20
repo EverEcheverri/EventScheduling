@@ -24,6 +24,7 @@ public static class RegisterUseCasesExtensions
       .AddScoped<ICreateEvent, CreateEventUseCase>()
       .AddScoped<ICreateInvitation, CreateInvitationUseCase>()
       .AddScoped<IUpdateInvitation, UpdateInvitationUseCase>()
-      .AddScoped<IEventDetails, EventDetailsUseCase>();
+      .AddScoped<IEventDetails, EventDetailsUseCase>()
+      .AddScoped<IGetCity, GetCityUseCase>();
   }
 }

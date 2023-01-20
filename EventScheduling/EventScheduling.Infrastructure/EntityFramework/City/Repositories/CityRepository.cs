@@ -1,5 +1,6 @@
 ﻿namespace EventScheduling.Infrastructure.EntityFramework.City.Repositories;
 
+using System.Linq.Expressions;
 using Domain.City;
 using Domain.City.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -30,5 +31,14 @@ public class CityRepository : ICityRepository
   {
     cancellationToken.ThrowIfCancellationRequested();
     return await _context.City.FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
+  }
+
+  public async Task<City> GetAsync(Expression<Func<City, bool>> predicate, CancellationToken cancellationToken)
+  {
+    var city = await _context.City
+      .Include(c => c.Users)
+      .FirstOrDefaultAsync(predicate, cancellationToken);
+
+    return city;
   }
 }
