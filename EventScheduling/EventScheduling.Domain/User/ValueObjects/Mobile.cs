@@ -2,8 +2,9 @@
 
 using System.Text.RegularExpressions;
 using Exceptions;
+using SharedKernel;
 
-public sealed class Mobile
+public sealed class Mobile : ValueObject
 {
   private const short ValueMaxLength = 15;
   private const short ValueMinLength = 10;
@@ -49,5 +50,10 @@ public sealed class Mobile
   private static bool HasValidCharacters(string value)
   {
     return MobileNumberRegex.IsMatch(value);
+  }
+
+  protected override IEnumerable<object> GetEqualityComponents()
+  {
+    yield return _mobile;
   }
 }

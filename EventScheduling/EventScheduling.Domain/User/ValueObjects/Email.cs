@@ -1,9 +1,11 @@
 ﻿namespace EventScheduling.Domain.User.ValueObjects;
 
+using System.IO;
 using System.Text.RegularExpressions;
+using EventScheduling.Domain.SharedKernel;
 using Exceptions;
 
-public sealed class Email
+public sealed class Email : ValueObject
 {
   private const short EmailMaxLength = 254;
   private readonly string _email;
@@ -57,5 +59,10 @@ public sealed class Email
   public static implicit operator string(Email email)
   {
     return email._email;
+  }
+
+  protected override IEnumerable<object> GetEqualityComponents()
+  {
+    yield return _email;
   }
 }

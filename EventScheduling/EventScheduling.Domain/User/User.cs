@@ -30,7 +30,6 @@ public sealed class User
       throw new NoValidCityIdException();
     }
 
-    var user = new User(id, email, name, mobile, role, cityId);
-    return user;
+    return new User(id, email, name, mobile, role, cityId);
   }
 }

@@ -33,11 +33,14 @@ public class EventSchedulingDbContext : DbContext
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    var connectionString = GetConnectionStringPath();
-    base.OnConfiguring(optionsBuilder);
-    optionsBuilder.UseSqlite($"Data Source={connectionString};")
-      .LogTo(Console.WriteLine, LogLevel.Information);
-    optionsBuilder.EnableSensitiveDataLogging();
+    if (!optionsBuilder.IsConfigured)
+    {
+      var connectionString = GetConnectionStringPath();
+      base.OnConfiguring(optionsBuilder);
+      optionsBuilder.UseSqlite($"Data Source={connectionString};")
+        .LogTo(Console.WriteLine, LogLevel.Information);
+      optionsBuilder.EnableSensitiveDataLogging();
+    }
   }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
