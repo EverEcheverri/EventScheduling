@@ -13,7 +13,7 @@ public sealed class Invitation
     EndTime = endTime;
   }
 
-  public Guid EventId { get; set; }
+  public Guid EventId { get; private set; }
 
   public Guid Id { get; }
   public string Email { get; }

@@ -34,7 +34,6 @@ public class UserRepositoryTest
       .Returns(mockConfSection.Object);
   }
 
-  //GetByEmailAsync
   [Fact]
   public async Task FileRepository_GetByEmailAsync_Returns_User()
   {

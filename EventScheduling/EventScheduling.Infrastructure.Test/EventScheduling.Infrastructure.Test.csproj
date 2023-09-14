@@ -24,12 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="EntityFramework\Event\" />
     <Folder Include="EntityFramework\User\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EventScheduling.Domain\EventScheduling.Domain.csproj" />
     <ProjectReference Include="..\EventScheduling.Infrastructure\EventScheduling.Infrastructure.csproj" />
+    <ProjectReference Include="..\EventScheduling.Test.Data\EventScheduling.Test.Data.csproj" />
   </ItemGroup>
 
 </Project>

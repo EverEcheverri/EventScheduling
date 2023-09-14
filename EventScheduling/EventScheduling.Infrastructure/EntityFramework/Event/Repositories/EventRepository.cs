@@ -1,5 +1,6 @@
 ﻿namespace EventScheduling.Infrastructure.EntityFramework.Event.Repositories;
 
+using System.Linq.Expressions;
 using Domain.Event;
 using Domain.Event.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -71,5 +72,18 @@ public class EventRepository : IEventRepository
   {
     cancellationToken.ThrowIfCancellationRequested();
     return await _context.Event.FirstOrDefaultAsync(u => u.Name == eventName, cancellationToken);
+  }
+
+  public async Task<Event> GetAsync(Expression<Func<Event, bool>> predicate, CancellationToken cancellationToken)
+  {
+    var result = await _context.Invitation
+      .GroupBy(e => e.EventId)
+      .Select(e => e.Key)
+      .ToListAsync(cancellationToken: cancellationToken);
+
+
+    return (await _context.Event
+      .Include(c => c.Invitation)
+      .FirstOrDefaultAsync(predicate, cancellationToken))!;
   }
 }

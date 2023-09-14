@@ -1,4 +1,6 @@
-﻿namespace EventScheduling.Domain.Event.Repositories;
+﻿using System.Linq.Expressions;
+
+namespace EventScheduling.Domain.Event.Repositories;
 
 public interface IEventRepository
 {
@@ -8,4 +10,5 @@ public interface IEventRepository
   Task UpdateAsync(Event @event, CancellationToken cancellationToken);
 
   Task<Event> GetByIdWithInvitationsAsync(Guid eventId, CancellationToken cancellationToken);
+  Task<Event> GetAsync(Expression<Func<Event, bool>> predicate, CancellationToken cancellationToken);
 }
