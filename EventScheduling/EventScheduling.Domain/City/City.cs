@@ -6,40 +6,40 @@ using User;
 
 public sealed class City
 {
-  private readonly List<User> _users = new();
+    private readonly List<User> _users = new();
 
-  private City(Guid id, string name, Guid countryId, string timeZoneId)
-  {
-    Id = id;
-    Name = name;
-    CountryId = countryId;
-    TimeZoneId = timeZoneId;
-  }
-
-  public Guid Id { get; }
-  public string Name { get; }
-  public Guid CountryId { get; }
-  public string TimeZoneId { get; }
-  public IReadOnlyCollection<User> Users => _users;
-
-  public static City Build(Guid id, string name, Guid countryId, string timeZoneId)
-  {
-    if (string.IsNullOrWhiteSpace(name))
+    private City(Guid id, string name, Guid countryId, string timeZoneId)
     {
-      throw new NameNullOrEmptyException();
+        Id = id;
+        Name = name;
+        CountryId = countryId;
+        TimeZoneId = timeZoneId;
     }
 
-    if (!Guid.TryParse(id.ToString(), out _))
-    {
-      throw new NoValidIdException();
-    }
+    public Guid Id { get; }
+    public string Name { get; }
+    public Guid CountryId { get; }
+    public string TimeZoneId { get; }
+    public IReadOnlyCollection<User> Users => _users;
 
-    if (string.IsNullOrWhiteSpace(timeZoneId))
+    public static City Build(Guid id, string name, Guid countryId, string timeZoneId)
     {
-      throw new TimeZoneIdNullOrEmptyException();
-    }
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new NameNullOrEmptyException();
+        }
 
-    var city = new City(id, name, countryId, timeZoneId);
-    return city;
-  }
+        if (!Guid.TryParse(id.ToString(), out _))
+        {
+            throw new NoValidIdException();
+        }
+
+        if (string.IsNullOrWhiteSpace(timeZoneId))
+        {
+            throw new TimeZoneIdNullOrEmptyException();
+        }
+
+        var city = new City(id, name, countryId, timeZoneId);
+        return city;
+    }
 }
